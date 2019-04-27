@@ -316,7 +316,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Your MIC summary title}
+\title{Impact of Time-of-Flight Reconstruction on Respiratory Motion Modelling in Non-Attenuation-Corrected PET}
 %
 %
 % author names and IEEE memberships
@@ -328,11 +328,13 @@
 % was not built to handle multiple paragraphs
 %
 
-\author{Alexander~C.~Whitehead,~\IEEEmembership{Student~Member,~IEEE,}
-       Kris~Thielemans,~\IEEEmembership{Senior~Member,~IEEE} and~Jamie~McClelland% <-this % stops a space
-\thanks{This work was funded by GE Healthcare ()}%        
-\thanks{Alexander~C.~Whitehead and Kris~Thielemans are with the Institute of Nuclear Medicine, University College London, London NW1~2BU, UK (contact: \texttt{alexander.whitehead.18@ucl.ac.uk}).}%
-\thanks{Jamie~McClelland is with the Centre for Medical Image Computing, University College London, London NW1~2BU, UK.}%
+\author{Alexander~C.~Whitehead~(\IEEEmembership{Student~Member~IEEE}),
+        ~Jamie~McClelland,
+        Elise~C.~Emond~(\IEEEmembership{Student~Member~IEEE})
+        ~and~Kris~Thielemans~(\IEEEmembership{Senior~Member~IEEE})% <-this % stops a space
+\thanks{This work was supported by GE Healthcare}%        
+\thanks{Alexander~C.~Whitehead, Elise~C.~Emond and Kris~Thielemans are with the Institute of Nuclear Medicine, University College London, London, NW1~2BU, UK (contact: \texttt{alexander.whitehead.18@ucl.ac.uk}.}%
+\thanks{Jamie~McClelland is with the Centre for Medical Image Computing, University College London, London, NW1~2BU, UK.}%
 }
 
 % note the % following the last \IEEEmembership and also \thanks - 
@@ -389,7 +391,7 @@
 % As a general rule, do not put math, special symbols or citations
 % in the abstract or keywords.
 \begin{abstract}
-Don't forget your abstract
+
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -397,7 +399,7 @@ Don't forget your abstract
 %\vspace{-0.2cm}
 
 \begin{IEEEkeywords}
-Your keywords
+Respiratory~Motion~Modelling, Non-Attenuation-Corrected, Time-of-Flight~PET
 \end{IEEEkeywords}
 
 \vspace{-0.2cm}
@@ -431,11 +433,27 @@ Your keywords
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 
-\IEEEPARstart{T}{his} is the introduction :) 
-\section{Theory}
+\IEEEPARstart{R}{espiratory} motion, during positron emission tomography (PET) acquisitions, accounts for artefacts and loss of resolution in the thoracic region. This is detrimental as it reduces the certainty with which conclusions can be made from the data. For instance, a lesion which is near the boarder between the lung and the liver may appear to be in one in the data while in actuality it is in the other.
 
+In order to attempt to correct for respiratory motion many methods have been proposed, most of which utilise some form of registration. A solely registration based method is not ideal though as it is susceptible to noise.
 
-\section{Experiments and Results}
+A current trend in the literature seems to be the research of motion models. A motion model attempts to relate the motion apparent in the data to some surrogate signal, for instance, the displacement of the anterior and posterior surface or the position of the diaphragm. The model outputs a transformation or deformation field back to the reference geometry for every value of the surrogate signal.
+
+Motion models could be superior to a solely registration based methods as they best fit the motion at a given time point to a line through the data rather than having an individual measure of the motion at every measured time point.
+
+When it comes to the issue of calculating a motion model there is the paradox of how to or if to apply attenuation correction to the initial PET activity distribution. If attenuation is corrected, using a static attenuation map, before the motion model is calculated then there is a high likelihood that the artefacts caused by the misalignment of the activity distribution and the attenuation map would hide the underlying motion of the anatomy. However, if attenuation is not corrected then the contrast may be too low and the noise too great in the activity distribution to calculate an accurate motion model.
+
+In PET, the position of each activity event is detected as a line-of-response (LOR) that connects two detectors. The measure of the time-of-flight (TOF) difference between the two detectors allows for the localisation of the position of the activity event to within a range along the LOR dictated by the TOF resolution of the scanner.
+
+In nonTOF reconstruction, the surface of the body has a greater contrast as there is no time information, therefore there is no information on the annihilation event localisation and the probabilities along a line of response, between 2 detectors, is the same. In the absence of attenuation correction, the reconstruction will place the events more likely towards the surface of the body. In TOF reconstruction, there is greater contrast inside the body, because of the time information constraining the event locations via changes of the probabilities along the line of response for the different TOF bins.
+
+Thus, here we perform an evaluation as to whether TOF reconstruction on non-attenuation-corrected (NAC) PET data can adequately increase the contrast and lower the noise of the activity distribution to facilitate the calculation of an accurate motion model.
+
+\section{Methods}
+Methods
+
+\section{Results}
+Results
 
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
@@ -520,8 +538,8 @@ Your keywords
 %\end{tabular}
 %\end{table}
 
-\section{Conclusion and Discussion}
-
+\section{Conclusion}
+Conclusion
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.

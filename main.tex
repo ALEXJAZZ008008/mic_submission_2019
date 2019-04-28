@@ -291,14 +291,14 @@
         Elise~C.~Emond~(\IEEEmembership{Student~Member~IEEE}),
         Nikos~Efthimiou~(\IEEEmembership{Member~IEEE}),
         Adeyemi~Akintonde,
-        Bjoern Eiben,
+        Bj{\"o}rn Eiben,
         Brian~F.~Hutton~(\IEEEmembership{Senior~Member~IEEE},
         ~Jamie~McClelland
         ~and~Kris~Thielemans~(\IEEEmembership{Senior~Member~IEEE})% <-this % stops a space
 \thanks{This work was supported by GE Healthcare.}%
 \thanks{Elise~C.~Emond was supported by GlaxoSmithKline (BIDS3000030921)}
 \thanks{Alexander~C.~Whitehead, Elise~C.~Emond, Brian~F.~Hutton and Kris~Thielemans are with the Institute of Nuclear Medicine, University College London, London, NW1~2BU, UK (contact: \texttt{alexander.whitehead.18@ucl.ac.uk}.}%
-\thanks{Nikos Efthimiou is with the School of Life Sciences, Faculty of Health Sciences, University of Hull, Hull, HU6 7RX, UK}%
+\thanks{Nikos Efthimiou is with the PET research centre, Faculty of Health Sciences, University of Hull, Hull, HU6~7RX, UK}%
 \thanks{Adeyemi~Akintonde, Bjoern Eiben and Jamie~McClelland are with the Centre for Medical Image Computing, University College London, London, NW1~2BU, UK.}%
 }
 
@@ -343,11 +343,6 @@
 % make the title area
 \maketitle
 
-% As a general rule, do not put math, special symbols or citations
-% in the abstract or keywords.
-\begin{abstract}
-
-\end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 
@@ -386,6 +381,13 @@ PET, Respiratory~Motion~Modelling, Non-Attenuation-Corrected, Time-of-Flight
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 
+\begin{@twocolumnfalse}
+    \maketitle
+    \begin{abstract}
+      blah blahdfdfjhdkfjhdkfjdh k
+    \end{abstract}
+  \end{@twocolumnfalse}
+
 \IEEEPARstart{R}{espiratory} motion causes artefacts and loss of resolution in the thoracic region in positron emission tomography (PET)~\cite{Nehmeh2008}. %This is detrimental as it reduces the certainty with which conclusions can be made from the data. For instance, a lesion which is near the boarder between the lung and the liver may appear to be in one in the data while in actuality it is in the other.
 
 Many methods have been proposed to correct for respiratory motion, usually involving image registration between a reference image and a set of images in different respiratory gates~\cite{Oliveira2014}. However, such pair-wise registration is susceptible to noise. It also does not allow prediction of the respiratory state for unseen data.
@@ -394,7 +396,7 @@ Motion modelling attempts to overcome these deficiencies by relating the motion 
 %Motion models could be superior to a solely registration based methods as they best fit the motion at a given time point to a line through the data rather than having an individual measure of the motion at every measured time point.
 The model outputs a transformation or deformation field for every value of the surrogate signal. Motion models are calculated on a series of either time or gating based images.
 
-In PET, the question arises with the benefits of using attenuation correction for PET image registration. If images are reconstructed using a static attenuation map,  artefacts caused by the misalignment of the activity distribution and the attenuation map would hide the underlying motion of the anatomy \cite{Bousse2016}. It could therefore be advantageous to estimate motion on non-attenuation corrected (NAC) images. However, contrast may be too low to calculate an accurate motion model. 
+In PET, the question arises with the benefits of using attenuation correction for PET image registration. If images are reconstructed using a static attenuation map,  artefacts caused by the misalignment of the activity distribution and the attenuation map would hide the underlying motion of the anatomy~\cite{Bousse2016}. It could therefore be advantageous to estimate motion on non-attenuation corrected (NAC) images. However, contrast may be too low to calculate an accurate motion model. 
 
 %In PET, the position of each activity event is detected as a line-of-response (LOR) that connects two detectors. The measure of the time-of-flight (TOF) difference between the two detectors allows for the localisation of the position of the activity event to within a range along the LOR dictated by the TOF resolution of the scanner.
 
@@ -407,7 +409,6 @@ The extended cardiac-torso (XCAT)~\cite{Segars2009} software was used to generat
 
 PET acquisitions were simulated using Software for Tomographic Image Reconstruction (STIR)~\cite{Thielemans2012} through the Synergistic Image Reconstruction Framework (SIRF)~\cite{Ovtchinnikov2017} to forward project the input data to sinograms using the geometry of a GE Discovery 710 and, where relevant, a TOF resolution of 375ps similar to the GE Signa PET/MR (using TOF mashing to reduce computation time resulting in 13 TOF time bins of size 376.5ps)~\cite{Efthimiou2017}. Attenuation was included using the relevant attenuation map generated by XCAT. Scatter and randoms were not taken into account in the simulation.
 Poisson noise realisations were generated to simulate an acquisition as if it had been gated into 6 bins over an acquisition of 120 seconds, this emulated a standard single bed position acquisition.
-
 Data was reconstructed with attenuation with STIR through SIRF using the Ordered Subsets Expectation Maximisation reconstruction algorithm using 9 iterations and 18 subsets~\cite{Hudson1994}. 
 
 \begin{figure}
@@ -417,7 +418,12 @@ Data was reconstructed with attenuation with STIR through SIRF using the Ordered
     \label{fig:mcr}
 \end{figure}
 
-To calculate motion models, NiftyRegResp was used using the sum of squared differences as objective function~\cite{NiftyRegResp}. The surrogate signal passed to NiftyRegResp consisted of both the displacement of the anterior-posterior and the  diaphragm movement from XCAT. For illustration, Figure~\ref{fig:mcr} shows the NAC motion-compensated reconstructions (MCR) obtained by NiftyRegResp after estimation of the motion models.
+Following~\cite{McClelland2013}, we can write a motion model as a linear combination of surrogate signal (direct correspondence model). In the case of two surrogate signals, the following bivariate model can be used:
+\begin{equation}
+    \bm{M} = \phi(s_1,s_2)=\sum_{i=0}^{n}\sum_{j=0}^{n-i}\bm{A}_{i,j}s_1^i s_2^j
+\end{equation}
+where $s_1$ and $s_2$ are the surrogate signals and $\bm{A}_{i,j}$ a vector of polynomial coefficients (of order $n$). 
+To estimate the motion models, NiftyRegResp was used using the sum of squared differences as objective function~\cite{NiftyRegResp}. The surrogate signal passed to NiftyRegResp consisted of both the displacement of the anterior-posterior and the  diaphragm movement from XCAT. For illustration, Figure~\ref{fig:mcr} shows the NAC motion-compensated reconstructions (MCR) obtained by NiftyRegResp after estimation of the motion models.
 
 In order to evaluate the motion models generated, the estimated deformation fields were used to warp the ground truth PET volume, which was generated by XCAT at the mean position of the breathing cycle as discussed above. These warped images should be as close as possible to the original 6 input volumes generated by XCAT. The motion model calculated from the PET XCAT images was compared to the motion model calculated from nonTOF NAC reconstructions and the TOF NAC reconstruction.  
 
@@ -431,7 +437,7 @@ In order to evaluate the motion models generated, the estimated deformation fiel
     \label{fig:non_tof}
 \end{figure}
 
-Figure~\ref{fig:non_tof} shows the difference between the ground truth and the nonTOF derived motion model at end-inhalation, as can be seen there is a great deal of variation between the two images when it comes to the motion of the lesion and liver. This is backed up by the mean square error (MSE) between the two volumes, which is 97538.
+Figure~\ref{fig:non_tof} shows the difference between the ground truth and the nonTOF derived motion model at end-inhalation, as can be seen there is a great deal of variation between the two images when it comes to the motion of the lesion and liver. This is backed up by the mean squared error (MSE) between the two volumes, which is 97538.
 
 \begin{figure}
     \centering

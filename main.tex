@@ -1,8 +1,6 @@
-
 \documentclass[10pt]{IEEEtran}
 
 %\linespread{0.922}
-
 
 % journal
 %
@@ -10,13 +8,8 @@
 % manually specify the path to it like:
 % \documentclass[journal]{../sty/IEEEtran}
 
-
-
-
-
 % Some very useful LaTeX packages include:
 % (uncomment the ones you want to load)
-
 
 % *** MISC UTILITY PACKAGES ***
 %
@@ -36,11 +29,6 @@
 % When switching from latex to pdflatex and vice-versa, the compiler may
 % have to be run twice to clear warning/error messages.
 
-
-
-
-
-
 % *** CITATION PACKAGES ***
 %
 %\usepackage{cite}
@@ -58,9 +46,6 @@
 % The latest version can be obtained at:
 % http://www.ctan.org/pkg/cite
 % The documentation is contained in the cite.sty file itself.
-
-
-
 
 \usepackage[pdftex]{graphicx}
 \usepackage{subcaption}
@@ -85,6 +70,7 @@
   % every instance of \includegraphics
   % \DeclareGraphicsExtensions{.eps}
 \fi
+
 % graphicx was written by David Carlisle and Sebastian Rahtz. It is
 % required if you want graphics, photos, etc. graphicx.sty is already
 % installed on most LaTeX systems. The latest version and documentation
@@ -105,10 +91,6 @@
 % You can find documentation about the pdfTeX application at:
 % http://www.tug.org/applications/pdftex
 
-
-
-
-
 % *** MATH PACKAGES ***
 %
 \usepackage{amsmath}
@@ -125,8 +107,6 @@
 
 \usepackage{bm}
 \usepackage{amssymb} %FOR MATHBB
-
-
 
 % *** SPECIALIZED LIST PACKAGES ***
 %
@@ -146,7 +126,6 @@
 % algorithmicx.sty package by Szasz Janos:
 % http://www.ctan.org/pkg/algorithmicx
 
-
 % *** ALIGNMENT PACKAGES ***
 %
 %\usepackage{array}
@@ -160,13 +139,9 @@
 % latest version and documentation can be obtained at:
 % http://www.ctan.org/pkg/array
 
-
 % IEEEtran contains the IEEEeqnarray family of commands that can be used to
 % generate multiline equations as well as matrices, tables, etc., of high
 % quality.
-
-
-
 
 % *** SUBFIGURE PACKAGES ***
 %\ifCLASSOPTIONcompsoc
@@ -191,9 +166,6 @@
 % The latest version and documentation of subfig.sty can be obtained at:
 % http://www.ctan.org/pkg/subfig
 
-
-
-
 % *** FLOAT PACKAGES ***
 %
 %\usepackage{fixltx2e}
@@ -210,7 +182,6 @@
 % needed.
 % The latest version and documentation can be found at:
 % http://www.ctan.org/pkg/fixltx2e
-
 
 %\usepackage{stfloats}
 % stfloats.sty was written by Sigitas Tolusis. This package gives LaTeX2e
@@ -237,9 +208,6 @@
 % \usepackage{dblfloatfix}
 % The latest version can be found at:
 % http://www.ctan.org/pkg/dblfloatfix
-
-
-
 
 %\ifCLASSOPTIONcaptionsoff
 %  \usepackage[nomarkers]{endfloat}
@@ -279,9 +247,6 @@
 % later in the document, say, to conditionally put the References on a 
 % page by themselves.
 
-
-
-
 % *** PDF, URL AND HYPERLINK PACKAGES ***
 %
 %\usepackage{url}
@@ -291,19 +256,14 @@
 % http://www.ctan.org/pkg/url
 % Basically, \url{my_url_here}.
 
-
-
-
 % *** Do not adjust lengths that control margins, column widths, etc. ***
 % *** Do not use packages that alter fonts (such as pslatex).         ***
 % There should be no need to do such things with IEEEtran.cls V1.6 and later.
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
 
-
 \usepackage[style=ieee,maxbibnames=3,minbibnames=2,maxcitenames=3,mincitenames=1,backend=biber,defernumbers=true,useprefix=false]{biblatex}
 \addbibresource{./bibtex/bib/Biblio.bib}
-
 
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
@@ -355,8 +315,6 @@
 % this is a minor point as most people would not even notice if the said evil
 % space somehow managed to creep in.
 
-
-
 % The paper headers
 %\markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
 %{Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for IEEE Journals}
@@ -368,22 +326,14 @@
 % You can use \ifCLASSOPTIONpeerreview for conditional compilation here if
 % you desire.
 
-
-
-
 % If you want to put a publisher's ID mark on the page you can do it like
 % this:
 %\IEEEpubid{0000--0000/00\$00.00~\copyright~2015 IEEE}
 % Remember, if you use this you must call \IEEEpubidadjcol in the second
 % column for its text to clear the IEEEpubid mark.
 
-
-
 % use for special paper notices
 %\IEEEspecialpapernotice{(Invited Paper)}
-
-
-
 
 % make the title area
 \maketitle
@@ -399,7 +349,7 @@
 %\vspace{-0.2cm}
 
 \begin{IEEEkeywords}
-Respiratory~Motion~Modelling, Non-Attenuation-Corrected, Time-of-Flight~PET
+PET, Respiratory~Motion~Modelling, Non-Attenuation-Corrected, Time-of-Flight
 \end{IEEEkeywords}
 
 \vspace{-0.2cm}
@@ -413,8 +363,6 @@ Respiratory~Motion~Modelling, Non-Attenuation-Corrected, Time-of-Flight~PET
 % For peerreview papers, this IEEEtran command inserts a page break and
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
-
-
 
 \section{Introduction}
 % The very first letter is a 2 line initial drop letter followed
@@ -441,7 +389,7 @@ A current trend in the literature seems to be the research of motion models. A m
 
 Motion models could be superior to a solely registration based methods as they best fit the motion at a given time point to a line through the data rather than having an individual measure of the motion at every measured time point.
 
-When it comes to the issue of calculating a motion model there is the paradox of how to or if to apply attenuation correction to the initial PET activity distribution. If attenuation is corrected, using a static attenuation map, before the motion model is calculated then there is a high likelihood that the artefacts caused by the misalignment of the activity distribution and the attenuation map would hide the underlying motion of the anatomy. However, if attenuation is not corrected then the contrast may be too low and the noise too great in the activity distribution to calculate an accurate motion model.
+When it comes to the issue of calculating a motion model there is the paradox of how to or if to apply attenuation correction to the initial PET activity distribution. If attenuation is corrected, using a static attenuation map, before the motion model is calculated then there is a high likelihood that the artefacts caused by the misalignment of the activity distribution and the attenuation map would hide the underlying motion of the anatomy. However, if attenuation is not corrected then the contrast may be too low and the noise too great in the activity distribution to calculate an accurate motion model. Usually after this initial motion estimation is made the activity distribution and attenuation map can be warped based on the motion estimate, thus removing the constraint on attenuation correction.
 
 In PET, the position of each activity event is detected as a line-of-response (LOR) that connects two detectors. The measure of the time-of-flight (TOF) difference between the two detectors allows for the localisation of the position of the activity event to within a range along the LOR dictated by the TOF resolution of the scanner.
 
@@ -450,20 +398,49 @@ In nonTOF reconstruction, the surface of the body has a greater contrast as ther
 Thus, here we perform an evaluation as to whether TOF reconstruction on non-attenuation-corrected (NAC) PET data can adequately increase the contrast and lower the noise of the activity distribution to facilitate the calculation of an accurate motion model.
 
 \section{Methods}
-In order to test the assertion discussed above multiple applications have been written to acquire data, simulate data, reconstruct data and calculate motion models. To acquire the input data extended cardiac-torso (XCAT) was used to generate 6 volumes over a linear 5 second breathing cycle, with 1 volume at full expiration at the beginning of the cycle and 1 volume at full expiration at the end of the cycle. The breathing signal passed to XCAT to animate the phantom was the default displacement of the anterior and posterior surface and the position of the diaphragm. XCAT was also used to generate a "ground truth" volume at the mean position of the breathing cycle for use to evaluate the results later. All volumes had a field of view showing the bottom of the lungs, diaphragm and top of the liver with a 40mm diameter spherical lesion placed into the lung.
+In order to test the assertion discussed above multiple applications have been written to acquire data, simulate data, reconstruct data and calculate motion models. To acquire the input data extended cardiac-torso (XCAT) was used to generate 6 volumes over a linear 5 second breathing cycle, with 1 volume at full expiration at the beginning of the cycle and 1 volume at full expiration at the end of the cycle. The breathing signal passed to XCAT to animate the phantom was the default displacement of the anterior and posterior surface and the position of the diaphragm. XCAT was also used to generate a ground truth volume at the mean position of the breathing cycle for use to evaluate the results later. All volumes had a field of view showing the bottom of the lungs, diaphragm and top of the liver with a 40mm diameter spherical lesion placed into the lung.
 
 To simulate a PET acquisition an application was written which used the Software for Tomographic Image Reconstruction (STIR) through the Synergistic Image Reconstruction Framework (SIRF) to forward project the input data to sinograms. The model used to forward project also applied a suitable amount of noise to simulate an acquisition of any given time, in this instance it treated the data as if it had been gated into 6 bins over an acquisition of 120 seconds, this emulated a standard single bed position acquisition. The model used had the geometry of a GE Discovery 710 and, where relevant, a TOF resolution similar to the upcoming GE Signa, this was 13 TOF time bins, timing bins of size 376.5ps and a timing resolution of 375ps with a TOF mashing factor of 1. The simulation application applied attenuation to each volume using the relevant attenuation map generated by XCAT
 
 To reconstruct the PET acquisitions simulated above again STIR was used through SIRF using the Ordered Subsets Expectation Maximisation reconstruction algorithm using 9 sub-iterations and 18 subsets. Again the model used had the geometry of a GE Discovery 710. The reconstruction application did not apply attenuation correction.
 
-To calculate motion models NiftyRegResp was used using the sum of squared differences as it's objective function. The surrogate signal passed to NiftyRegResp consisted of both the displacement of the anterior and posterior surface and the position of the diaphragm from XCAT, these signals were normalised to be between -1 and 1 with a mean value of 0.
+To calculate motion models NiftyRegResp was used using the sum of squared differences as it's objective function. The surrogate signal passed to NiftyRegResp consisted of both the displacement of the anterior and posterior surface and the position of the diaphragm from XCAT, these signals were normalised to be between -1 and 1 with a mean value of 0. NiftyRegResp can use the motion model, which has been calculated, to perform a motion compensated reconstruction (MCR) to attempt to correct for the respiratory motion.
+
+\begin{figure}
+    \centering
+    \label{fig:mcr}
+    \includegraphics[scale=0.18]{figures/mcr.jpg}
+    \caption{This figure shows on the left a MCR of the nonTOF data and on the right a MCR of the TOF data}
+\end{figure}
 
 \section{Results}
-In order to evaluate the motion models generated above
+In order to evaluate the motion models generated above the motion model calculated from the input data, the nonTOF reconstruction and the TOF reconstruction was applied in inverse to the ground truth volume which was generated at the mean position of the breathing cycle as discussed above. This created 3 lots of 6 volumes which should be estimated to be as close as possible to the original 6 input volumes generated by XCAT.
+
+The volumes created using the motion model calculated from the input data could be considered to be the ground truth estimated input volumes to which the volumes estimated from the motion models calculated from the nonTOF and TOF data could be compared.
+
+\begin{figure}
+    \centering
+    \label{fig:non_tof}
+    \includegraphics[scale=0.18]{figures/non_tof.jpg}
+    \caption{This figure shows on the left the ground truth motion model applied to the ground truth volume, on the right the motion model calculated from the nonTOF data applied to the ground truth volume and in the centre the difference between the two volumes. All volumes are from gate 3 or maximum inhalation}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \label{fig:tof}
+    \includegraphics[scale=0.18]{figures/tof.jpg}
+    \caption{This figure shows on the left the ground truth motion model applied to the ground truth volume, on the right the motion model calculated from the TOF data applied to the ground truth volume and in the centre the difference between the two volumes. All volumes are from gate 3 or maximum inhalation}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \label{fig:sum}
+    \includegraphics[scale=0.18]{figures/sum.jpg}
+    \caption{This figure shows on the left the difference between the nonTOF estimated data and the ground truth and on the right the difference between the TOF estimated data an the ground truth summed over all gates}
+\end{figure}
 
 % needed in second column of first page if using \IEEEpubid
 %\IEEEpubidadjcol
-
 
 % An example of a floating figure using the graphicx package.
 % Note that \label must occur AFTER (or within) \caption.
@@ -515,7 +492,6 @@ In order to evaluate the motion models generated above
 % subcaption is not desired, just leave its contents blank,
 % e.g., \subfloat[].
 
-
 % An example of a floating table. Note that, for IEEE style tables, the
 % \caption command should come BEFORE the table and, given that table
 % captions serve much like titles, are usually capitalized except for words
@@ -545,15 +521,19 @@ In order to evaluate the motion models generated above
 %\end{table}
 
 \section{Conclusion}
-Conclusion
+In conclusion, as can be seen in the figures above, the motion model calculated from the TOF data appears to more closely match the ground truth motion model when it comes to the motion of the liver, diaphragm, heart and lesion. However, it seems that the nonTOF data more accurately represents the motion of the surface of the body.
+
+Because it is the motion of the heavily attenuated internal organs that is difficult to estimate with NAC data it is likely that TOF derived motion model is more suitable to start an iterative motion correction algorithm with.
+
+A large disadvantage of the TOF reconstruction is that it greatly increases the time investment in both reconstruction and calculating the motion model.
+
+In the future it may be interesting to combine both the nonTOF data with the TOF data to estimate both the surface and internal motion with greater accuracy. However, this woud increase processing time exponentially.
 
 % Can use something like this to put references on a page
 % by themselves when using endfloat and the captionsoff option.
 \ifCLASSOPTIONcaptionsoff
   \newpage
 \fi
-
-
 
 % trigger a \newpage just before the given reference
 % number - used to balance the columns on the last page

@@ -256,7 +256,7 @@
 % (Unless specifically asked to do so by the journal or conference you plan
 % to submit to, of course. )
 
-\usepackage[style=ieee,maxbibnames=1,minbibnames=1,maxcitenames=1,mincitenames=1,backend=biber,defernumbers=true,useprefix=false]{biblatex}
+\usepackage[style=ieee,maxbibnames=1,minbibnames=1,maxcitenames=1,mincitenames=1,backend=biber,defernumbers=false]{biblatex}
 \addbibresource{./bibtex/bib/Biblio.bib}
 
 % correct bad hyphenation here
@@ -270,7 +270,7 @@
 % not capitalized unless they are the first or last word of the title.
 % Linebreaks \\ can be used within to get better formatting as desired.
 % Do not put math or special symbols in the title.
-\title{Impact of Time-of-Flight on Respiratory Motion Modelling using Non-Attenuation-Corrected PET Images}
+\title{Impact of Time-of-Flight on Respiratory Motion Modelling using Non-Attenuation-Corrected PET}
 %
 %
 % author names and IEEE memberships
@@ -352,7 +352,7 @@
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 \begin{abstract}
-This paper investigates whether incorporating non-attenuation-corrected time-of-flight reconstruction for positron emission tomography increases the accuracy of any motion models derived from the reconstructed data, over standard non-attenuation-corrected non-time-of-flight reconstruction. This is in order to test if it is plausible to use non-attenuation-corrected data at all to calculate motion models. Motion models in this context are being used to perform motion compensated reconstruction on the initial input data, this is to attempt to lesson the effect of respiratory motion during the positron emission tomography acquisition. In order to test this assertion an experiment has been conducted where positron emission tomography acquisitions have been simulated over one bed position with a field of view of the lungs and diaphragm. The data is simulated with an adequate amount of noise and attenuation has been included. The data is then reconstructed with ordered subset expectation maximisation. Motion models are calculated from ground truth data to form ground truth motion models, then they are compared to the motion models calculated from the non-attenuation-corrected non-time-of-flight data and non-attenuation-corrected time-of-flight-data. Upon comparison it has been found that the non-attenuation-corrected time-of-fight reconstruction provides great enough contrast and number of counts, in the lungs of the volume, to allow for accurate estimation of motion. Thus this can be used over mismatched attenuation corrected data when forming motion models.
+Respiratory motion decreases image quality in positron emission tomography. Unless gated CT or MR data are available, motion correction relies on image registration of the PET data. To avoid mis-registration due to attenuation mismatches, most existing methods rely on pair-wise registration of non-attenuation-corrected (NAC) PET images. This is a challenging problem due to a low contrast and high noise. This paper investigates the possibility of using motion models for respiratory motion correction in PET, and in particular whether incorporating time-of-flight information increases the accuracy of the motion model derived from the NAC reconstructed images. XCAT simulations are used for one bed position with a field of view of the lungs and diaphragm. A TOF resolution of 375ps was used. NAC images are obtained using OSEM and used as input for motion model estimation. Different motion models are compared using the XCAT ground truth images. The results indicate that TOF improves the accuracy of the motion model considerably.
 
 \end{abstract}
 
@@ -384,28 +384,29 @@ PET, Respiratory~Motion~Modelling, Non-Attenuation-Corrected, Time-of-Flight
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
 
-\IEEEPARstart{R}{espiratory} motion causes artefacts and loss of resolution in the thoracic region in Positron Emission Tomography (PET)~\cite{Nehmeh2008}. %This is detrimental as it reduces the certainty with which conclusions can be made from the data. For instance, a lesion which is near the boarder between the lung and the liver may appear to be in one in the data while in actuality it is in the other.
+\IEEEPARstart{R}{espiratory} motion causes artefacts and loss of resolution in the thoracic region in Positron Emission Tomography (PET)~\cite{Nehmeh2008}.% This is detrimental as it reduces the certainty with which conclusions can be made from the data. For instance, a lesion which is near the boarder between the lung and the liver may appear to be in one in the data while in actuality it is in the other.
 
-Many methods have been proposed to correct for respiratory motion, usually involving image registration between a reference image and a set of images in different positions in the respiratory circle (gating)~\cite{Oliveira2014}. However, such pair-wise registration is sensitive to noise. It also does not allow prediction of the respiratory state for data not used to form the motion model.
+Many methods have been proposed to correct for respiratory motion, usually involving image registration between a reference image and a set of images in different positions in the respiratory cycle (gating)~\cite{Oliveira2014}. However, such pair-wise registration is sensitive to noise. It also does not allow prediction of the respiratory state for data not used to form the motion model.
 
-Motion modelling attempts to overcome these deficiencies by relating the motion in the data to a surrogate signal, for instance, the displacement of the anterior surface and/or the position of the diaphragm~\cite{McClelland2013}.
+Motion modelling attempts to overcome these deficiencies by relating the motion in the data to a surrogate signal~\cite{McClelland2013}.%, for instance, the displacement of the anterior surface and/or the position of the diaphragm.
+
 %Motion models could be superior to a solely registration based methods as they best fit the motion at a given time point to a line through the data rather than having an individual measure of the motion at every measured time point.
 The model outputs a transformation or deformation field for every value of the surrogate signal. Motion models are calculated on a series of either time or gating based images.
 
-In PET, the question arises with the benefits of using attenuation correction for PET image registration. If images are reconstructed using a static attenuation map then artefacts caused by the misalignment between the activity distribution and the attenuation map would obscure the underlying motion of the anatomy~\cite{Bousse2016}. It could therefore be advantageous to estimate motion on non-attenuation corrected (NAC) images. However, contrast may be too low to calculate an accurate motion model. 
+In PET, the question arises as to the benefits of using attenuation correction for PET image registration. If images are reconstructed using a static attenuation map, then artefacts caused by the misalignment between the activity distribution and the attenuation map would obscure the underlying motion of the anatomy~\cite{Bousse2016a}. It could therefore be advantageous to estimate motion on non-attenuation corrected (NAC) images. However, contrast may be too low to calculate an accurate motion model and artefacts associated with the mismatch between the acquisition and system model could obscure the underlying motion further. 
 
 %In PET, the position of each activity event is detected as a line-of-response (LOR) that connects two detectors. The measure of the time-of-flight (TOF) difference between the two detectors allows for the localisation of the position of the activity event to within a range along the LOR dictated by the TOF resolution of the scanner.
 
 %In nonTOF reconstruction, the surface of the body has a greater contrast as there is no time information, therefore there is no information on the activity event position along the LOR, the activity event probability along the LOR is the same. In the absence of attenuation correction, the reconstruction will place the events with greater probability towards the surface of the body. In TOF reconstruction, there is greater contrast inside the body because of the time information constraining the activity event position via changes of the activity event probability along the LOR.
 
-The aim of this work is to investigate whether Time-of-Flight (TOF) can adequately increase the contrast and lower the noise of NAC images to facilitate the calculation of an accurate motion model.
+In the absence of Time-of-Flight (TOF), there is no information on the activity position along the line-of-response (LOR), therefore, NAC reconstruction will place the activity towards the surface of the body and low-density regions. In TOF, the time information constrains the activity position along the LOR changing the nature and extent of the artefacts associated with NAC. The volumes are different in their expectation not just their noise properties.
+
+The aim of this work is to investigate whether TOF can adequately increase the contrast and lower the noise of NAC images to facilitate the calculation of an accurate motion model.
 
 \section{Materials and Methods}
-The extended cardiac-torso (XCAT)~\cite{Segars2009} digital anthropomorphic phantom was used to generate $6$ volumes over a linear $5$ second breathing cycle, with $1$ volume at full expiration at the beginning of the cycle and $1$ volume at full expiration at the end of the cycle. Activity concentrations were derived from a static FDG patient scan. The breathing surrogate signal $\bm{s}$ was the default displacement of the chest in the anterior-posterior direction in one dimension and the displacement of the diaphragm in the inferior-superior direction in the other acquired from XCAT. In addition the ground truth volume at the mean position of the breathing cycle for use to evaluate the results later, was generated. The FOV included the base of the lungs, diaphragm and top of the liver with a $40$ mm diameter spherical lesion placed into the right lung.
+The XCAT~\cite{Segars2009} digital anthropomorphic phantom was used to generate $6$ volumes over a linear $5$ second breathing cycle, with $1$ volume at full expiration at the beginning of the cycle and $1$ volume at full expiration at the end of the cycle. Activity concentrations were derived from a static FDG patient scan. The breathing surrogate signal $\bm{s}$ was the default displacement of the chest in the anterior-posterior direction in one dimension and the displacement of the diaphragm in the inferior-superior direction in the other acquired from XCAT. In addition the ground truth volume at the mean position of the breathing cycle for use to evaluate the results later, was generated. The FOV included the base of the lungs, diaphragm and top of the liver with a $40$ mm diameter spherical lesion placed into the right lung.
 
-PET acquisitions were simulated using Software for Tomographic Image Reconstruction (STIR)~\cite{Thielemans2012} through the Synergistic Image Reconstruction Framework (SIRF)~\cite{Ovtchinnikov2017} to forward project the input data to sinograms using the geometry of a GE Discovery 710 and, where relevant, a TOF resolution of $375$ ps similar to the GE Signa PET/MR (using TOF mashing to reduce computation time resulting in $13$ TOF time bins of size $376.5$ps)~\cite{Efthimiou2018}. Attenuation was included using the relevant attenuation map generated by XCAT. Scatter and randoms were not taken into account in the simulation. Multiple noise realisations were generated to simulate an acquisition as if it had been gated into $6$ bins over an acquisition of $120$ s, this emulated a standard single bed position acquisition.
-
-Data were reconstructed with attenuation using OSEM with $9$ full iterations and $18$ subsets~\cite{Hudson1994}. 
+PET acquisitions were simulated using STIR~\cite{Thielemans2012} through SIRF~\cite{Ovtchinnikov2017} to forward project the input data to sinograms using the geometry of a GE Discovery 710 and, where relevant, a TOF resolution of $375$ ps similar to the GE Signa PET/MR (using TOF mashing to reduce computation time resulting in $13$ TOF time bins of size $376.5$ps)~\cite{Efthimiou2018}. Attenuation was included in the simulation using the relevant attenuation map generated by XCAT. Scatter and randoms were not taken into account in the simulation. Multiple noise realisations were generated to simulate an acquisition as if it had been gated into $6$ bins over an acquisition of $120$ s, this emulated a standard single bed position acquisition. Data were reconstructed without attenuation correction using OSEM with $9$ full iterations and $18$ subsets~\cite{Hudson1994}. 
 
 3D B-splines were used to model spatial deformations with the corresponding warping operation denoted as $W(\alpha_t)$. Following~\cite{McClelland2013}, we use a motion model where the coefficients of the deformation field at time $t$ are expressed as a polynomial of the scalar $s_t$ (direct correspondence model):
 \begin{equation}
@@ -413,21 +414,21 @@ Data were reconstructed with attenuation using OSEM with $9$ full iterations and
 \end{equation}
 \noindent where $\alpha_{kt}$ is the 3D B-spline coefficient for node $k$ at time point $t$, $s_t$ is the surrogate signal at $t$ and $R_1$, $R_2$ and $R_3$ are polynomial coefficients. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figures/mcr.png}
     \caption{From top to bottom: MCR of the non-TOF data, MCR of the TOF data.}
     \label{fig:mcr}
 \end{figure}
 
-NiftyRegResp was used to estimate the motion models, using the sum of squared differences as objective function~\cite{NiftyRegResp}. The surrogate signal passed to NiftyRegResp consisted of both the displacement of the anterior-posterior and the  diaphragm movement from XCAT. Fig.~\ref{fig:mcr} illustrates the NAC motion-compensated reconstructions (MCR) obtained by NiftyRegResp after estimation of the motion models.
+NiftyRegResp was used to estimate the motion models, using the sum of squared differences as objective function. The surrogate signal passed to NiftyRegResp consisted of both the displacement of the anterior-posterior and the  diaphragm movement from XCAT. Fig.~\ref{fig:mcr} illustrates the NAC motion-compensated reconstructions (MCR) obtained by NiftyRegResp after estimation of the motion models.
 
 \section{Results}
 In order to evaluate the motion models, the estimated deformation fields were used to warp the ground truth PET volume. The warped images were then compared to the original volumes $\bold{f}_t$ from XCAT using mean squared errors (MSE) as $\mathrm{mean}((\bold{f}_t-W(\alpha_t) \bold{f}_\mathrm{ref})^2)$. We compared $3$ motion models, calculated from the PET XCAT images (considered to be the ideal case), from nonTOF NAC reconstructions and the TOF NAC reconstruction respectively.  
 
 % The volumes created using the motion model calculated from the input data could be considered to be the ground truth estimated input volumes to which the volumes estimated from the motion models calculated from the nonTOF and TOF data could be compared.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figures/non_tof.png}
     \caption{From top to bottom: ground truth motion model applied to ground truth volume, differences between the two volumes, motion model estimated from the nonTOF data applied to ground truth volume. All volumes correspond to end-inhalation}
@@ -436,7 +437,7 @@ In order to evaluate the motion models, the estimated deformation fields were us
 
 %Figure~\ref{fig:non_tof} shows the difference between the ground truth and the nonTOF derived motion model at end-inhalation, as can be seen there is a great deal of variation between the two images when it comes to the motion of the lesion and liver. 
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figures/tof.png}
     \caption{From top to bottom: ground truth motion model applied to ground truth volume, differences between the two volumes, motion model estimated from the nonTOF data applied to ground truth volume. All volumes correspond to end-inhalation}
@@ -445,14 +446,14 @@ In order to evaluate the motion models, the estimated deformation fields were us
 
 %Fig.~\ref{fig:tof} shows the difference between the ground truth and the TOF derived motion model at end-inhalation, when compared to fig.~\ref{fig:non_tof} there is significantly less difference between the positions of the lesion and liver. This is again backed up by the MSE, especially when the MSE of the nonTOF data and the TOF data are compared. The MSE between the ground truth volume and the TOF volume is $62691$ which is almost a third less than the MSE between the ground truth volume and the nonTOF volume.
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[scale=0.4]{figures/sum.png}
     \caption{From top to bottom: normalised differences between the ground truth and nonTOF volume, normalised differences between the ground truth and TOF volume. All volumes correspond to a sum over all gates.}
     \label{fig:sum}
 \end{figure}
 
-\begin{table}[h!]
+\begin{table}[H]
     \centering
         \caption{Comparison of the MSE for the nonTOF data and the TOF data for all gates plus the mean MSE over all gates.}
     \begin{tabular}{|l|ll|}
